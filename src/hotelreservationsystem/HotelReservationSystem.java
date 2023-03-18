@@ -50,6 +50,7 @@ public class HotelReservationSystem {
         int minTotalRate = Integer.MAX_VALUE;
         int maxRating = Integer.MIN_VALUE;
         Hotels cheapestHotel = null;
+        Hotels bestRatedHotel = null;
 
         for (Hotels hotel : hotels) {
             int totalRate = 0;
@@ -65,7 +66,7 @@ public class HotelReservationSystem {
             }
 
             System.out.println("Please choose what to perform");
-            System.out.println("1. Find cheapest hotel\n2. Find cheapest best rated hotel\n3. Exit");
+            System.out.println("1. Find cheapest hotel\n2. Find cheapest best rated hotel\n3. Best rated hotel\n4. Exit");
             int choice = scanner.nextInt();
             switch (choice){
                 case 1:
@@ -87,11 +88,21 @@ public class HotelReservationSystem {
                     System.out.println(cheapestHotel);
                     break;
                 case 3:
+                    if (hotel.getRating() > maxRating || (hotel.getRating() == maxRating && totalRate < minTotalRate)) {
+                        maxRating = hotel.getRating();
+                        minTotalRate = totalRate;
+                        bestRatedHotel = hotel;
+                    }
+                    assert bestRatedHotel != null;
+                    System.out.println("Best rated hotel for the given date range is: " + bestRatedHotel.getName());
+                    System.out.println(bestRatedHotel);
+                    break;
+                case 4:
                     System.out.println("Thank you!");
                     break;
             }
         }
-        return cheapestHotel;
+        return null;
     }
 
     public static void main(String[] args) {
