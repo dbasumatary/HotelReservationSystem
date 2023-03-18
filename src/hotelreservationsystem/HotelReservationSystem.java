@@ -48,6 +48,7 @@ public class HotelReservationSystem {
 
         //Initialize the values
         int minTotalRate = Integer.MAX_VALUE;
+        int maxRating = Integer.MIN_VALUE;
         Hotels cheapestHotel = null;
 
         for (Hotels hotel : hotels) {
@@ -62,8 +63,34 @@ public class HotelReservationSystem {
                 minTotalRate = totalRate;
                 cheapestHotel = hotel;
             }
-        }
 
+            System.out.println("Please choose what to perform");
+            System.out.println("1. Find cheapest hotel\n2. Find cheapest best rated hotel\n3. Exit");
+            int choice = scanner.nextInt();
+            switch (choice){
+                case 1:
+                    if (totalRate < minTotalRate) {
+                        minTotalRate = totalRate;
+                        cheapestHotel = hotel;
+                    }
+                    assert cheapestHotel != null;
+                    System.out.println("Cheapest hotel for the given date range is: " + cheapestHotel.getName());
+                    System.out.println(cheapestHotel);;
+                    break;
+                case 2:
+                    if (hotel.getRating() > maxRating || (hotel.getRating() == maxRating && totalRate < minTotalRate)) {
+                        minTotalRate = totalRate;
+                        maxRating = hotel.getRating();
+                    }
+                    assert cheapestHotel != null;
+                    System.out.println("Cheapest best rated hotel for the given date range is: " + cheapestHotel.getName());
+                    System.out.println(cheapestHotel);
+                    break;
+                case 3:
+                    System.out.println("Thank you!");
+                    break;
+            }
+        }
         return cheapestHotel;
     }
 
@@ -82,9 +109,6 @@ public class HotelReservationSystem {
         reservationSystem.addHotel(ridgewood);
 
         reservationSystem.hotels.forEach(System.out::println);
-        Hotels cheapestHotel = reservationSystem.findCheapestHotel();
-        System.out.println("Cheapest hotel for the given date range is: " + cheapestHotel.getName());
-        System.out.println(cheapestHotel);
-        System.out.println("The rating of " + cheapestHotel.getName() + " is " + cheapestHotel.getRating());
+        System.out.println(reservationSystem.findCheapestHotel());
     }
 }
