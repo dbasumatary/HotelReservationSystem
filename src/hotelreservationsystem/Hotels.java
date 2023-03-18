@@ -6,7 +6,6 @@ public class Hotels {
     private int weekdayRate;
     private int weekendRate;
 
-
     //parameterized constructor
     public Hotels(String name, int rating, int weekdayRate, int weekendRate) {
         this.name = name;
@@ -30,7 +29,6 @@ public class Hotels {
     public int getWeekendRate() {
         return weekendRate;
     }
-
     @Override
     public String toString() {
         return "Hotel{" + "Name = " + name  + ", Rating = " + rating + ", WeekDay rate = " + weekdayRate + ", WeekEnd rate = " + weekendRate + "}\n";
