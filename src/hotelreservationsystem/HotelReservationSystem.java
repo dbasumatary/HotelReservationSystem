@@ -85,5 +85,6 @@ public class HotelReservationSystem {
         Hotels cheapestHotel = reservationSystem.findCheapestHotel();
         System.out.println("Cheapest hotel for the given date range is: " + cheapestHotel.getName());
         System.out.println(cheapestHotel);
+        System.out.println("The rating of " + cheapestHotel.getName() + " is " + cheapestHotel.getRating());
     }
 }
