@@ -5,7 +5,6 @@ import java.util.List;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Scanner;
 
 public class HotelReservationSystem {
@@ -23,11 +22,13 @@ public class HotelReservationSystem {
     //Method to find the cheapest hotel for a given date range
     public Hotels findCheapestHotel() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the start date (ddMMMyyyy): ");
+
+        //Example to enter date: 12Jan2023
+        System.out.print("Enter the start date (ddMMMyyyy): ");
         String startDateString = scanner.next();
         LocalDate startDate = LocalDate.parse(startDateString, DateTimeFormatter.ofPattern("ddMMMyyyy"));
 
-        System.out.println("Enter the end date (ddMMMyyyy): ");
+        System.out.print("Enter the end date (ddMMMyyyy): ");
         String endDateString = scanner.next();
         LocalDate endDate = LocalDate.parse(endDateString, DateTimeFormatter.ofPattern("ddMMMyyyy"));
 
@@ -45,6 +46,7 @@ public class HotelReservationSystem {
             startDate = startDate.plusDays(1);
         }
 
+        //Initialize the values
         int minTotalRate = Integer.MAX_VALUE;
         Hotels cheapestHotel = null;
 
@@ -66,7 +68,8 @@ public class HotelReservationSystem {
     }
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Hotel Reservation Program");
+        System.out.println("************   Welcome to Hotel Reservation Program   *************");
+        System.out.println("---------------------------------------------------------------------");
         HotelReservationSystem reservationSystem = new HotelReservationSystem();
 
         Hotels lakewood = new Hotels("Lakewood", 3, 110, 90);
@@ -78,7 +81,7 @@ public class HotelReservationSystem {
         Hotels ridgewood = new Hotels("Ridgewood", 5, 220, 150);
         reservationSystem.addHotel(ridgewood);
 
-        System.out.println(reservationSystem.hotels);
+        reservationSystem.hotels.forEach(System.out::println);
         Hotels cheapestHotel = reservationSystem.findCheapestHotel();
         System.out.println(cheapestHotel);
     }
